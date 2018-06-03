@@ -27,7 +27,12 @@
         CGFloat scale = 1- (fabs(obj.center.x - contentOffsetX - viewCenterX) /self.itemSize.width * (1 - self.scale));
         obj.transform = CGAffineTransformMakeScale(scale, scale);
         if (scale >= 0.99) {
-            self->_middleIndex = obj.indexPath.row;
+            NSInteger index = obj.indexPath.row;
+            if (self->_middleIndex != index) {
+                [self willChangeValueForKey:@"middleIndex"];
+                self->_middleIndex = index;
+                [self didChangeValueForKey:@"middleIndex"];
+            }
         }
     }];
     return attributes;

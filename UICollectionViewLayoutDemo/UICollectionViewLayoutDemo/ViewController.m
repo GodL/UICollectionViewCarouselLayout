@@ -33,6 +33,7 @@
     _collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    [layout addObserver:self forKeyPath:@"middleIndex" options:NSKeyValueObservingOptionNew context:nil];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -46,8 +47,8 @@
     return cell;
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSLog(@"%ld",_collectionView.collectionViewLayout.middleIndex);
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    NSLog(@"%@",change);
 }
 
 - (void)didReceiveMemoryWarning {
