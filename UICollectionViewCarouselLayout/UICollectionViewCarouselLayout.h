@@ -12,4 +12,12 @@
 
 @property (nonatomic,assign) CGFloat scale;
 
+@property (nonatomic,assign) NSInteger middleIndex;
+
+@end
+
+@interface UICollectionViewLayout (CarouseLayout)
+
+@property (nonatomic,assign,readonly) NSInteger middleIndex;
+
 @end

@@ -8,7 +8,10 @@
 
 #import "UICollectionViewCarouselLayout.h"
 
-@implementation UICollectionViewCarouselLayout
+@implementation UICollectionViewCarouselLayout {
+    @package
+    NSInteger _middleIndex;
+}
 
 
 - (void)prepareLayout {
@@ -23,6 +26,9 @@
     [attributes enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         CGFloat scale = 1- (fabs(obj.center.x - contentOffsetX - viewCenterX) /self.itemSize.width * (1 - self.scale));
         obj.transform = CGAffineTransformMakeScale(scale, scale);
+        if (scale >= 0.99) {
+            self->_middleIndex = obj.indexPath.row;
+        }
     }];
     return attributes;
 }
@@ -42,6 +48,18 @@
         [new addObject:obj.copy];
     }];
     return new;
+}
+
+@end
+
+@implementation UICollectionViewLayout (CarouseLayout)
+
+- (NSInteger)middleIndex {
+    NSAssert([self isKindOfClass:[UICollectionViewCarouselLayout class]], @"only UICollectionViewCarouselLayout has");
+    if ([self isKindOfClass:UICollectionViewCarouselLayout.class]) {
+        return ((UICollectionViewCarouselLayout *)self)->_middleIndex;
+    }
+    return 0;
 }
 
 @end

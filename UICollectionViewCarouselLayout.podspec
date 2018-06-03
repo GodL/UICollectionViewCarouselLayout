@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "UICollectionViewCarouselLayout"
-  s.version      = "1.0"
+  s.version      = "1.1"
   s.summary      = "A UICollectionViewLayout base on UICollectionViewFlowLayout"
   s.homepage     = "https://github.com/godL/UICollectionViewCarouselLayout"
   s.license      = "MIT"
